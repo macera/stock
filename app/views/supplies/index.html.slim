@@ -1,0 +1,32 @@
+section.content-header
+  h1 在庫検索
+
+section.content
+  div.box.box-info
+    div.box-header.with-border
+      h3.box-title 一覧
+
+    div.box-body
+      table.table.table-bordered
+        thead
+          tr
+            th = t 'activerecord.attributes.supply.name'
+            th = t 'activerecord.attributes.supply.price'
+            th = t 'activerecord.attributes.supply.category_name'
+            th
+            th
+            th
+      
+        tbody
+          - @supplies.each do |supply|
+            tr
+              td = supply.name
+              td = supply.price
+              td = supply.category_name
+              td = link_to 'Show', supply
+              td = link_to 'Edit', edit_supply_path(supply)
+              td = link_to 'Destroy', supply, data: { confirm: 'Are you sure?' }, method: :delete
+
+      br
+      
+      = link_to 'New Supply', new_supply_path, { class: "btn btn-info" }

@@ -1,0 +1,42 @@
+= form_for @product do |f|
+  - if @product.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@product.errors.count, "error")} prohibited this product from being saved:"
+      ul
+        - @product.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :price
+    = f.number_field :price
+  .field
+    = f.label :purchased_date
+    = f.date_select :purchased_date
+  .field
+    = f.label :start_date
+    = f.date_select :start_date
+  .field
+    = f.label :end_date
+    = f.date_select :end_date
+  .field
+    = f.label :quantity
+    = f.number_field :quantity
+  .field
+    = f.label :quantity_type
+    = f.number_field :quantity_type
+  .field
+    = f.label :less
+    = f.check_box :less
+  .field
+    = f.label :memo
+    = f.text_area :memo
+  .field
+    = f.label :supply
+    = f.text_field :supply
+  .field
+    = f.label :shop
+    = f.text_field :shop
+  .actions = f.submit

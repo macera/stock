@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @shop.name
+p
+  strong Online:
+  = @shop.online
+p
+  strong Memo:
+  = @shop.memo
+
+=> link_to 'Edit', edit_shop_path(@shop)
+'|
+=< link_to 'Back', shops_path

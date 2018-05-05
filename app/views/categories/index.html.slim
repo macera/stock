@@ -1,0 +1,32 @@
+section.content-header
+  h1 カテゴリ検索
+
+section.content
+  div.box.box-info
+    div.box-header.with-border
+      h3.box-title 一覧
+
+    div.box-body
+      table.table.table-bordered
+
+
+        thead
+          tr
+            th Name
+            th Group
+            th
+            th
+            th
+      
+        tbody
+          - @categories.each do |category|
+            tr
+              td = category.name
+              td = category.group
+              td = link_to 'Show', category
+              td = link_to 'Edit', edit_category_path(category)
+              td = link_to 'Destroy', category, data: { confirm: 'Are you sure?' }, method: :delete
+      
+      br
+      
+      = link_to 'New Category', new_category_path, { class: "btn btn-info" }

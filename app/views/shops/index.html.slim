@@ -1,0 +1,34 @@
+section.content-header
+  h1 購入先検索
+
+section.content
+  div.box.box-info
+    div.box-header.with-border
+      h3.box-title 一覧
+
+    div.box-body
+      table.table.table-bordered
+        thead
+          tr
+            th Name
+            th 
+              i class="fa fa-laptop"
+            th Memo
+            th
+            th
+            th
+        tbody
+          - @shops.each do |shop|
+            tr
+              td = shop.name
+              td
+                - if shop.online?
+                  i class="fa fa-laptop"
+              td = shop.memo
+              td = link_to 'Show', shop
+              td = link_to 'Edit', edit_shop_path(shop)
+              td = link_to 'Destroy', shop, data: { confirm: 'Are you sure?' }, method: :delete
+
+      br
+
+      = link_to 'New Shop', new_shop_path, { class: "btn btn-info" }

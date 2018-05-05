@@ -1,0 +1,48 @@
+section.content-header
+  h1 商品検索
+
+section.content
+  div.box.box-info
+    div.box-header.with-border
+      h3.box-title 一覧
+
+    div.box-body
+      table.table.table-bordered
+        thead
+          tr
+            th Name
+            th Price
+            th Purchased date
+            th Start date
+            th End date
+            th Quantity
+            th Quantity type
+            th Less
+            th Memo
+            th Supply
+            th Shop
+            th
+            th
+            th
+      
+        tbody
+          - @products.each do |product|
+            tr
+              td = product.name
+              td = product.price
+              td = product.purchased_date
+              td = product.start_date
+              td = product.end_date
+              td = product.quantity
+              td = product.quantity_type
+              td = product.less
+              td = product.memo
+              td = product.supply
+              td = product.shop
+              td = link_to 'Show', product
+              td = link_to 'Edit', edit_product_path(product)
+              td = link_to 'Destroy', product, data: { confirm: 'Are you sure?' }, method: :delete
+
+      br
+
+      = link_to 'New Product', new_product_path, { class: "btn btn-info" }

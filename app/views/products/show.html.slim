@@ -1,0 +1,39 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @product.name
+p
+  strong Price:
+  = @product.price
+p
+  strong Purchased date:
+  = @product.purchased_date
+p
+  strong Start date:
+  = @product.start_date
+p
+  strong End date:
+  = @product.end_date
+p
+  strong Quantity:
+  = @product.quantity
+p
+  strong Quantity type:
+  = @product.quantity_type
+p
+  strong Less:
+  = @product.less
+p
+  strong Memo:
+  = @product.memo
+p
+  strong Supply:
+  = @product.supply
+p
+  strong Shop:
+  = @product.shop
+
+=> link_to 'Edit', edit_product_path(@product)
+'|
+=< link_to 'Back', products_path

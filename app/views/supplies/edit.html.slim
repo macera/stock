@@ -1,0 +1,15 @@
+section.content-header
+  h1 常備品編集
+
+section.content
+  div.box
+    div.box-header.with-border
+      h3.box-title 編集
+
+    == render 'form'
+      
+    .box-footer
+      => link_to 'Show', @supply
+      '|
+      =< link_to 'Back', supplies_path, { class: "btn btn-default" }
+

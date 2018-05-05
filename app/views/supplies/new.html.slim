@@ -1,0 +1,12 @@
+section.content-header
+  h1 常備品登録
+
+section.content
+  div.box
+    div.box-header.with-border
+      h3.box-title 登録
+
+    == render 'form'
+
+    .box-footer
+      = link_to 'Back', supplies_path, { class: "btn btn-default" }

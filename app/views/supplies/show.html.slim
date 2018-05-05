@@ -1,0 +1,18 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @supply.name
+p
+  strong Price:
+  = @supply.price
+p
+  strong Memo:
+  = @supply.memo
+p
+  strong Category:
+  = @supply.category
+
+=> link_to 'Edit', edit_supply_path(@supply)
+'|
+=< link_to 'Back', supplies_path
