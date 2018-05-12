@@ -1,8 +1,14 @@
-h1 Editing product
+section.content-header
+  h1 補充編集
 
-== render 'form'
+section.content
+  div.box
+    div.box-header.with-border
+      h3.box-title 編集
 
-=> link_to 'Show', @product
-'|
-=< link_to 'Back', products_path
-
+    == render 'form'
+      
+    .box-footer
+      => link_to 'Show', @product
+      '|
+      =< link_to '補充リスト', stockouts_path, { class: "btn btn-default" }

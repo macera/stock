@@ -1,5 +1,15 @@
-h1 New product
+section.content-header
+  h1 補充
 
-== render 'form'
+section.content
+  div.box
+    div.box-header.with-border
+      h3.box-title = @supply.name
 
-= link_to 'Back', products_path
+    == render 'form'
+
+    .box-footer
+      = link_to '補充リスト', stockouts_path, { class: "btn btn-default" }
+
+
+

@@ -1,42 +1,83 @@
-= form_for @product do |f|
-  - if @product.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@product.errors.count, "error")} prohibited this product from being saved:"
-      ul
-        - @product.errors.full_messages.each do |message|
-          li = message
+= form_for [@supply, @product] do |f|
 
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :price
-    = f.number_field :price
-  .field
-    = f.label :purchased_date
-    = f.date_select :purchased_date
-  .field
-    = f.label :start_date
-    = f.date_select :start_date
-  .field
-    = f.label :end_date
-    = f.date_select :end_date
-  .field
-    = f.label :quantity
-    = f.number_field :quantity
-  .field
-    = f.label :quantity_type
-    = f.number_field :quantity_type
-  .field
-    = f.label :less
-    = f.check_box :less
-  .field
-    = f.label :memo
-    = f.text_area :memo
-  .field
-    = f.label :supply
-    = f.text_field :supply
-  .field
-    = f.label :shop
-    = f.text_field :shop
-  .actions = f.submit
+  .box-body
+    - if @product.errors.any?
+      #error_explanation
+        h2 = "#{pluralize(@product.errors.count, "error")} prohibited this product from being saved:"
+        ul
+          - @product.errors.full_messages.each do |message|
+            li = message
+  
+    .form-group
+      = f.label :name, class: 'col-sm-2 control-label'
+      .col-sm-10
+        = f.text_field :name, class: 'form-control'
+    .form-group
+      = f.label :price, class: 'col-sm-2 control-label'
+      .col-sm-10
+        = f.number_field :price, class: 'form-control'
+    .form-group
+      = f.label :purchased_date, class: 'col-sm-2 control-label'
+      .col-sm-10
+        = f.date_field :purchased_date, class: 'form-control'
+    .form-group
+      = f.label :start_date, class: 'col-sm-2 control-label'
+      .col-sm-8
+        = f.date_field :start_date, class: 'form-control'
+      .col-sm-2
+        = button_tag '同上', type: :buttton, id: '#same-start-date', class: 'btn btn-primary'
+    .form-group
+      = f.label :end_date, class: 'col-sm-2 control-label'
+      .col-sm-8
+        = f.date_field :end_date, class: 'form-control'
+      .col-sm-2
+        = button_tag '同上', type: :buttton, id: '#same-end-date', class: 'btn btn-primary'
+    .form-group
+      = f.label :quantity, class: 'col-sm-2 control-label'
+      .col-sm-10
+        = f.number_field :quantity, class: 'form-control'
+    .form-group
+      = f.label :quantity_type, class: 'col-sm-2 control-label'
+      .col-sm-10
+        = f.select :quantity_type, units.invert, { include_blank: '選択してください' }, { class: 'form-control' }
+
+    .form-group
+      = f.label :memo, class: 'col-sm-2 control-label'
+      .col-sm-10
+        = f.text_area :memo, rows: 3, class: 'form-control'
+
+    .form-group
+      = f.label :shop, class: 'col-sm-2 control-label'
+      .col-sm-10
+        = f.select :shop_id, Shop.all.pluck(:name, :id), { include_blank: '選択してください' }, { class: 'form-control' }
+
+    .form-group
+      = f.label :less, class: 'col-sm-2 control-label'
+      .col-sm-10
+        p
+          = f.check_box :less, {}, "true", "false"
+
+    - if @product.new_record?
+      .form-group
+        = label_tag :product_set, 'セット数', class: 'col-sm-2 control-label'
+        .col-sm-10
+          = number_field_tag :product_set, '', class: 'form-control'
+
+
+    .actions = f.submit class: 'btn btn-primary'
+
+javascript:
+  $('input').iCheck({
+    checkboxClass: 'icheckbox_flat-green',
+  });
+
+  $(function(){
+    $('#same-start-date').on('click', function(){
+      $('#product_start_date').val($('#product_purchased_date').val());
+    });
+  
+    $('#same-end-date').on('click', function(){
+      $('#product_end_date').val($('#product_start_date').val());
+    });
+  });
+

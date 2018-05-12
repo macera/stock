@@ -38,6 +38,8 @@ ja:
         quantity_type: 単位
         less: ごくわずか
         memo: 備考
+        supply: 在庫名
+        shop: 購入先
         created_at: 登録日
         updated_at: 更新日
     errors:
@@ -81,6 +83,7 @@ ja:
       default: "%Y/%m/%d"
       long: "%Y年%m月%d日(%a)"
       short: "%m/%d"
+      display: "%Y年%m月%d日"
     month_names:
     -
     - 1月
