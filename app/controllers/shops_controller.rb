@@ -10,6 +10,8 @@ class ShopsController < ApplicationController
   # GET /shops/1
   # GET /shops/1.json
   def show
+    @supplies = @shop.products.left_outer_joins(:supply).group('supplies.id, supplies.name').select('supplies.id, supplies.name, count(products.id) as product_count').order('product_count desc')
+    #@supplies = @shop.products.left_outer_joins(:supply).distinct.select('supplies.id, supplies.name')
   end
 
   # GET /shops/new

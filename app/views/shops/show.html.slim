@@ -1,15 +1,81 @@
 p#notice = notice
 
-p
-  strong Name:
-  = @shop.name
-p
-  strong Online:
-  = @shop.online
-p
-  strong Memo:
-  = @shop.memo
+section.content-header
+  h1 購入先
 
-=> link_to 'Edit', edit_shop_path(@shop)
-'|
-=< link_to 'Back', shops_path
+section.content
+  div.box
+    div.box-header.with-border
+      h3.box-title = @shop.name
+
+      p
+        strong Online:
+        = @shop.online
+      p
+        strong Memo:
+        = @shop.memo
+
+    .box-footer
+      => link_to 'Edit', edit_shop_path(@shop), { class: "btn btn-default" }
+      =< link_to 'Back', shops_path, { class: "btn btn-default" }
+
+  div.box
+    div.box-header.with-border
+      h3.box-title
+        | よく購入する在庫ランキング
+
+    .box-body
+      .text-right
+
+      table.table.table-bordered
+        thead
+          tr
+            th = t 'activerecord.attributes.product.name'
+            th 回数
+            th
+      
+        tbody
+          - @supplies.each do |supply|
+            tr
+              td = supply.name
+              td = supply.product_count
+              td = link_to '詳細', supply_path(supply)
+
+  div.box
+    div.box-header.with-border
+      h3.box-title
+        | 購入履歴
+
+
+    .box-body
+      .text-right
+
+      table.table.table-bordered
+        thead
+          tr
+            th = t 'activerecord.attributes.product.name'
+            th = t 'activerecord.attributes.product.price'
+            th = t 'activerecord.attributes.product.purchased_date'
+            th = t 'activerecord.attributes.product.start_date'
+            th = t 'activerecord.attributes.product.end_date'
+            th = t 'activerecord.attributes.product.quantity'
+            th = t 'activerecord.attributes.product.less'
+            th = t 'activerecord.attributes.product.supply'
+            th
+            th
+      
+        tbody
+          - @shop.products.order('purchased_date desc, start_date desc').each do |product|
+            tr
+              td = product.name
+              td = product.price.to_s(:delimited) if product.price
+              td = l(product.purchased_date, format: :display) if product.purchased_date
+              td = l(product.start_date, format: :display) if product.start_date
+              td = l(product.end_date, format: :display) if product.end_date
+              td = "#{product.quantity} #{unit product.quantity_type}"
+              td
+                - if product.less
+                  i class="fa fa-check"
+              td = product.supply_name
+              td = link_to '詳細', product
+              td = link_to '削除', product, data: { confirm: '削除してよろしいですか？' }, method: :delete

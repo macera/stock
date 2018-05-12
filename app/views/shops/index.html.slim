@@ -13,7 +13,6 @@ section.content
             th Name
             th 
               i class="fa fa-laptop"
-            th Memo
             th
             th
             th
@@ -24,10 +23,9 @@ section.content
               td
                 - if shop.online?
                   i class="fa fa-laptop"
-              td = shop.memo
-              td = link_to 'Show', shop
-              td = link_to 'Edit', edit_shop_path(shop)
-              td = link_to 'Destroy', shop, data: { confirm: 'Are you sure?' }, method: :delete
+              td = link_to '詳細', shop
+              td = link_to '編集', edit_shop_path(shop)
+              td = link_to '削除', shop, data: { confirm: '削除してよろしいですか？' }, method: :delete
 
       br
 
