@@ -1,0 +1,17 @@
+section.content-header
+  h1 統計情報
+
+section.content
+  div.box.box-info
+    div.box-header.with-border
+      h3.box-title 総合
+    div.box-body
+
+      p 利用中のトータル金額
+      = @total_using_amount.to_s(:delimited)
+      
+      p 今月のトータル購入金額
+      = @total_purchased_amount.to_s(:delimited)
+      
+      p 先月のトータル購入金額
+      = @total_last_purchased_amount.to_s(:delimited)

@@ -1,0 +1,40 @@
+section.content-header
+  h1 補充リスト
+
+section.content
+  div.box.box-info
+    div.box-header.with-border
+      h3.box-title 検索
+    div.box-body
+      = form_tag(stockouts_path, method: :get) do
+        .form-group
+          = label_tag :category_id, 'カテゴリ', class: 'col-sm-2 control-label'
+          .col-sm-5
+            = select_tag :category_id, options_for_select(Category.all.pluck(:name, :id), selected: params[:category_id]), include_blank: 'すべて', class: 'form-control'
+          .col-sm-5
+            =< submit_tag '検索する', { class: "btn btn-info" }
+
+  div.box.box-info
+    div.box-header.with-border
+      h3.box-title 一覧
+
+    div.box-body
+      table.table.table-bordered
+        thead
+          tr
+            th = t 'activerecord.attributes.supply.name'
+            th = t 'activerecord.attributes.supply.price'
+            th = t 'activerecord.attributes.supply.category_name'
+            th
+            th
+      
+        tbody
+          - @supplies.each do |supply|
+            tr
+              td = supply.name
+              td = supply.average_price.to_s(:delimited) if supply.average_price
+              td = supply.category_name
+              td = link_to '詳細', supply
+              td = link_to '補充', new_supply_product_path(supply_id: supply.id)
+
+
