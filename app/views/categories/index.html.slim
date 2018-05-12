@@ -22,10 +22,10 @@ section.content
           - @categories.each do |category|
             tr
               td = category.name
-              td = category.group
-              td = link_to 'Show', category
-              td = link_to 'Edit', edit_category_path(category)
-              td = link_to 'Destroy', category, data: { confirm: 'Are you sure?' }, method: :delete
+              td = category.group_name
+              td = link_to '詳細', category
+              td = link_to '編集', edit_category_path(category)
+              td = link_to '削除', category, data: { confirm: '削除してよろしいですか？' }, method: :delete
       
       br
       
