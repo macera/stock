@@ -9,18 +9,27 @@ html
   body.skin-blue
     div.wrapper
       header.main-header
-        = link_to "管理画面", {}, { class: "logo" }
+        = link_to "ZAIKO", root_path, { class: "logo" }
         nav.navbar.navbar-static-top role="navigation"
           ul.nav.navbar-nav
             li
-              = link_to "ナビゲーション", {}
+              = link_to '補充リスト', stockouts_path, {}
+            li
+              = link_to '在庫検索', supplies_path, {}
+            li
+              = link_to '統計', analysises_path, {}
 
       aside.main-sidebar
         section.sidebar
           ul.sidebar-menu
             li.header 機能一覧
-            li
-              = link_to "メニュー項目", {}
+            li = link_to '補充リスト', stockouts_path, {}
+            li = link_to '在庫検索', supplies_path, {}
+            li = link_to '統計', analysises_path, {}
+            li.header マスタ管理
+            li = link_to 'グループ', groups_path, {}
+            li = link_to 'カテゴリ', categories_path, {}
+            li = link_to '購入先', shops_path, {}
 
       div.content-wrapper
         = yield
