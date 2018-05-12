@@ -4,6 +4,26 @@ section.content-header
 section.content
   div.box.box-info
     div.box-header.with-border
+      h3.box-title 検索
+    div.box-body
+      = search_form_for(@q, url: supplies_path, method: :get) do |f|
+        .form-group
+          = f.label :category_id_eq, 'カテゴリ', class: 'col-sm-2 control-label'
+          .col-sm-10
+            = f.select :category_id_eq, Category.all.pluck(:name, :id), { include_blank: 'すべて' }, { class: 'form-control' }
+
+        .form-group
+          = f.label :name_cont, '名称', class: 'col-sm-2 control-label'
+          .col-sm-10
+            = f.text_field :name_cont, class: 'form-control'
+
+        .form-group
+          = f.submit '検索する', { class: "btn btn-info" }
+          =< link_to 'クリア', supplies_path, { class: "btn btn-default" }
+
+
+  div.box.box-info
+    div.box-header.with-border
       h3.box-title 一覧
 
     div.box-body
@@ -21,11 +41,11 @@ section.content
           - @supplies.each do |supply|
             tr
               td = supply.name
-              td = supply.price
+              td = supply.average_price.to_s(:delimited) if supply.average_price
               td = supply.category_name
-              td = link_to 'Show', supply
-              td = link_to 'Edit', edit_supply_path(supply)
-              td = link_to 'Destroy', supply, data: { confirm: 'Are you sure?' }, method: :delete
+              td = link_to '詳細', supply
+              td = link_to '編集', edit_supply_path(supply)
+              td = link_to '削除', supply, data: { confirm: '削除してよろしいですか？' }, method: :delete
 
       br
       

@@ -23,6 +23,6 @@
     .form-group
       = f.label :category, class: 'col-sm-2 control-label'
       .col-sm-10
-        = f.text_field :category, class: 'form-control'
+        = f.select :category_id, Category.all.pluck(:name, :id), { include_blank: '選択してください' }, { class: 'form-control' }
     
     .actions = f.submit class: 'btn btn-primary'
